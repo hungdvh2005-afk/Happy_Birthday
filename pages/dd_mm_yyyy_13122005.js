@@ -1,24 +1,42 @@
-// Nút bắn pháo giấy
-document.getElementById("confettiBtn").addEventListener("click", () => {
-  playPhaoSound();
-  setTimeout(() => {
-    playLoiChucSound(); // Lời chúc phát sau 3 giây
-  }, 3000);
-  startConfetti(10000, 2000); // Delay 2 giây cho confetti rơi
-}); // ===== NHẠC NỀN =====
+// ===== NHẠC NỀN - TỰ ĐỘNG PHÁT =====
 const bgMusic = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 let isPlaying = false;
+
+// Tự động phát nhạc sau 6 giây khi vào trang
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    bgMusic
+      .play()
+      .then(() => {
+        isPlaying = true;
+        musicBtn.innerHTML =
+          '<span class="icon">⏸️</span><span class="text">Tạm nínnn</span>';
+      })
+      .catch((err) => {
+        console.log("Auto-play failed, user interaction required:", err);
+      });
+  }, 6000);
+
+  // Confetti và âm thanh pháo
+  setTimeout(() => {
+    playPhaoSound();
+    setTimeout(() => {
+      playLoiChucSound();
+    }, 3000);
+    startConfetti(8000, 2000);
+  }, 500);
+});
 
 musicBtn.addEventListener("click", () => {
   if (isPlaying) {
     bgMusic.pause();
     musicBtn.innerHTML =
-      '<span class="icon">🎵</span><span class="text">Lên nhạc!</span>';
+      '<span class="icon">▶️</span><span class="text">Tiếp đeee</span>';
   } else {
     bgMusic.play();
     musicBtn.innerHTML =
-      '<span class="icon">⏸️</span><span class="text">Tạm nín!</span>';
+      '<span class="icon">⏸️</span><span class="text">Tạm nínnn</span>';
   }
   isPlaying = !isPlaying;
 });
@@ -160,14 +178,12 @@ function startConfetti(duration = 10000, delay = 0) {
     initConfetti(200);
     isConfettiActive = true;
 
-    // Reset opacity cho tất cả confetti
     confettiArray.forEach((c) => (c.opacity = 1));
 
     animateConfetti();
 
-    // Bắt đầu fade out sau thời gian duration
     confettiFadeTimeout = setTimeout(() => {
-      fadeOutConfetti(2000); // Mờ dần trong 2 giây
+      fadeOutConfetti(2000);
     }, duration);
   }, delay);
 }
@@ -175,18 +191,11 @@ function startConfetti(duration = 10000, delay = 0) {
 // Nút bắn pháo giấy
 document.getElementById("confettiBtn").addEventListener("click", () => {
   playPhaoSound();
-  startConfetti(10000);
-});
 
-// ===== TỰ ĐỘNG CHẠY CONFETTI KHI VÀO TRANG =====
-window.addEventListener("load", () => {
   setTimeout(() => {
-    playPhaoSound();
-    setTimeout(() => {
-      playLoiChucSound(); // Lời chúc phát sau 3 giây
-    }, 3000);
-    startConfetti(8000, 2000); // Âm thanh phát ngay, confetti delay 2 giây
-  }, 500);
+    playLoiChucSound();
+  }, 3000);
+  startConfetti(10000, 2000);
 });
 
 // ===== HIỆU ỨNG PARTICLES NỀN =====

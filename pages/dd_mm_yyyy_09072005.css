@@ -63,11 +63,11 @@ body::before {
 .profile-card {
   background: white;
   border-radius: 30px;
-  padding: 40px;
+  padding: 40px 30px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-/* Ảnh đại diện */
+/* Phần avatar và tên */
 .avatar-section {
   text-align: center;
   margin-bottom: 40px;
@@ -117,10 +117,11 @@ body::before {
 }
 
 .name {
-  font-size: clamp(28px, 6vw, 36px);
+  font-size: clamp(24px, 6vw, 36px);
   color: #003366;
   margin-bottom: 8px;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .birthdate {
@@ -129,7 +130,7 @@ body::before {
   font-weight: 500;
 }
 
-/* Thông tin */
+/* Thông tin chi tiết */
 .info-section {
   margin-bottom: 40px;
   animation: fadeIn 1s ease 0.5s both;
@@ -138,8 +139,8 @@ body::before {
 .info-item {
   display: flex;
   align-items: flex-start;
-  gap: 20px;
-  padding: 25px;
+  gap: 15px;
+  padding: 20px;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-radius: 20px;
   margin-bottom: 20px;
@@ -157,7 +158,7 @@ body::before {
 }
 
 .info-icon {
-  font-size: 40px;
+  font-size: 32px;
   flex-shrink: 0;
   animation: bounce 2s ease infinite;
 }
@@ -173,19 +174,19 @@ body::before {
 }
 
 .info-content h3 {
-  font-size: clamp(18px, 4vw, 22px);
+  font-size: clamp(17px, 4vw, 22px);
   color: #003366;
   margin-bottom: 8px;
   font-weight: 600;
+  line-height: 1.3;
 }
 
 .info-content p {
-  font-size: clamp(15px, 3.5vw, 17px);
+  font-size: clamp(14px, 3.5vw, 17px);
   color: #555;
   line-height: 1.6;
 }
 
-/* QR Code */
 .contact-section {
   text-align: center;
   margin-bottom: 30px;
@@ -193,10 +194,11 @@ body::before {
 }
 
 .contact-section h3 {
-  font-size: clamp(20px, 5vw, 24px);
+  font-size: clamp(18px, 5vw, 24px);
   color: #003366;
   margin-bottom: 20px;
   font-weight: 600;
+  line-height: 1.4;
 }
 
 .qr-code {
@@ -234,7 +236,7 @@ body::before {
   color: white;
   border: none;
   border-radius: 50px;
-  font-size: clamp(16px, 4vw, 18px);
+  font-size: clamp(15px, 4vw, 18px);
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 5px 20px rgba(0, 51, 102, 0.3);
@@ -253,22 +255,28 @@ body::before {
 
 /* Responsive */
 @media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
   .profile-card {
-    padding: 30px 25px;
+    padding: 30px 20px;
+    border-radius: 25px;
   }
 
   .avatar {
     width: 150px;
     height: 150px;
+    border: 5px solid #003366;
   }
 
   .info-item {
-    padding: 20px;
-    gap: 15px;
+    padding: 18px 15px;
+    gap: 12px;
   }
 
   .info-icon {
-    font-size: 35px;
+    font-size: 28px;
   }
 
   .qr-code {
@@ -279,30 +287,78 @@ body::before {
 
 @media (max-width: 480px) {
   body {
-    padding: 15px;
+    padding: 10px;
   }
 
   .profile-card {
-    padding: 25px 20px;
-    border-radius: 25px;
+    padding: 25px 15px;
+    border-radius: 20px;
   }
 
   .avatar {
     width: 130px;
     height: 130px;
+    border: 4px solid #003366;
+    margin-bottom: 15px;
+  }
+
+  .name {
+    margin-bottom: 6px;
+  }
+
+  .info-section {
+    margin-bottom: 30px;
   }
 
   .info-item {
-    padding: 18px;
-    gap: 12px;
+    padding: 15px 12px;
+    gap: 10px;
+    margin-bottom: 15px;
   }
 
   .info-icon {
-    font-size: 30px;
+    font-size: 26px;
+  }
+
+  .contact-section {
+    margin-bottom: 25px;
+  }
+
+  .contact-section h3 {
+    margin-bottom: 15px;
   }
 
   .qr-code {
     width: 160px;
     height: 160px;
+    border: 3px solid #003366;
+  }
+
+  .back-btn {
+    padding: 12px 25px;
+  }
+}
+
+@media (max-width: 360px) {
+  .profile-card {
+    padding: 20px 12px;
+  }
+
+  .avatar {
+    width: 110px;
+    height: 110px;
+  }
+
+  .info-item {
+    padding: 12px 10px;
+  }
+
+  .info-icon {
+    font-size: 24px;
+  }
+
+  .qr-code {
+    width: 140px;
+    height: 140px;
   }
 }

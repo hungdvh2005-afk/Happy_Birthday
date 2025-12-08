@@ -41,7 +41,7 @@ body::before {
   }
 }
 
-/* Nút cài đặt */
+/* Nút cài đặt màu sắc */
 #settingsBtn {
   position: fixed;
   right: 20px;
@@ -68,7 +68,7 @@ body::before {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Menu chọn màu */
+/* Menu chọn màu sắc */
 #colorMenu {
   display: none;
   position: fixed;
@@ -182,6 +182,7 @@ h1 {
   font-weight: 600;
   color: #667eea;
   border: 2px solid rgba(255, 255, 255, 0.3);
+  word-break: break-all;
 }
 
 .screen .placeholder {
@@ -199,13 +200,13 @@ h1 {
   padding: 18px;
   background: linear-gradient(
     135deg,
-    var(--btn-color-1) 0%,
-    var(--btn-color-2) 100%
+    var(--btn-color-1, #b8a4f5) 0%,
+    var(--btn-color-2, #7ba8ea) 100%
   );
   color: white;
   border: none;
   border-radius: 12px;
-  font-size: clamp(18px, 4vw, 22px);
+  font-size: clamp(16px, 4vw, 22px);
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -213,6 +214,9 @@ h1 {
   position: relative;
   overflow: hidden;
   min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn::before {
@@ -250,7 +254,7 @@ h1 {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
-/* Modal */
+/* Modal Thông tin */
 .modal {
   display: none;
   position: fixed;
@@ -300,19 +304,21 @@ h1 {
 .modal-content h2 {
   color: #f5576c;
   margin-top: 0;
-  font-size: clamp(24px, 5vw, 32px);
+  font-size: clamp(20px, 5vw, 32px);
+  line-height: 1.3;
 }
 
 .modal-content p {
   color: #666;
-  font-size: clamp(16px, 4vw, 18px);
+  font-size: clamp(15px, 4vw, 18px);
   margin: 20px 0;
+  line-height: 1.5;
 }
 
 .close {
   color: #aaa;
   float: right;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: bold;
   cursor: pointer;
   transition: color 0.2s;
@@ -325,6 +331,10 @@ h1 {
 
 /* Responsive Mobile */
 @media (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+
   #settingsBtn {
     right: 15px;
     top: 15px;
@@ -335,9 +345,13 @@ h1 {
   }
 
   #colorMenu {
-    right: 70px;
+    right: 65px;
     top: 15px;
     padding: 12px;
+  }
+
+  #colorMenu h3 {
+    font-size: 12px;
   }
 
   .color-option {
@@ -346,17 +360,20 @@ h1 {
   }
 
   .container {
-    padding: 0 10px;
+    padding: 0;
+    max-width: 100%;
   }
 
   h1 {
     margin-bottom: 20px;
+    font-size: 18px;
   }
 
   .screen {
-    padding: 15px;
+    padding: 15px 10px;
     min-height: 60px;
     margin-bottom: 20px;
+    font-size: 20px;
   }
 
   .keypad {
@@ -364,24 +381,58 @@ h1 {
   }
 
   .btn {
-    padding: 15px;
-    min-height: 55px;
+    padding: 12px 8px;
+    min-height: 50px;
+    font-size: 16px;
   }
 
   .modal-content {
     margin: 30% auto;
     padding: 25px 15px;
   }
+
+  .modal-content h2 {
+    font-size: 22px;
+  }
+
+  .modal-content p {
+    font-size: 15px;
+  }
 }
 
 @media (max-width: 360px) {
-  .btn {
-    padding: 12px;
-    min-height: 50px;
+  body {
+    padding: 10px;
+  }
+
+  h1 {
     font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  .screen {
+    padding: 12px 8px;
+    min-height: 55px;
+    font-size: 18px;
+  }
+
+  .btn {
+    padding: 10px 6px;
+    min-height: 45px;
+    font-size: 14px;
   }
 
   .keypad {
     gap: 6px;
+  }
+
+  #colorMenu {
+    right: 60px;
+    padding: 10px;
+  }
+
+  .color-option {
+    width: 30px;
+    height: 30px;
   }
 }
