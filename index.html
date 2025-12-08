@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khôn hồn thì nôn ra</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <button id="settingsBtn">⚙️</button>
+
+    <!-- Menu chọn màu -->
+    <div id="colorMenu">
+      <h3>Chọn lẹ, có 9 màu thôii</h3>
+      <div class="color-options">
+        <div
+          class="color-option active"
+          data-theme="0"
+          style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
+        ></div>
+        <div
+          class="color-option"
+          data-theme="1"
+          style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)"
+        ></div>
+        <div
+          class="color-option"
+          data-theme="2"
+          style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)"
+        ></div>
+        <div
+          class="color-option"
+          data-theme="3"
+          style="background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%)"
+        ></div>
+        <div
+          class="color-option"
+          data-theme="4"
+          style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
+        ></div>
+        <div
+          class="color-option"
+          data-theme="5"
+          style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)"
+        ></div>
+        <div
+          class="color-option"
+          data-theme="6"
+          style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"
+        ></div>
+        <div
+          class="color-option"
+          data-theme="7"
+          style="background: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%)"
+        ></div>
+        <div
+          class="color-option"
+          data-theme="8"
+          style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)"
+        ></div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1>✨ Nổ thử ngày sinh xem là đứa nào coi ✨</h1>
+
+      <div class="screen" id="screen">
+        <span class="placeholder">Ngày / Tháng / Năm</span>
+      </div>
+
+      <div class="keypad">
+        <button class="btn" data-num="1">1</button>
+        <button class="btn" data-num="2">2</button>
+        <button class="btn" data-num="3">3</button>
+        <button class="btn" data-num="4">4</button>
+        <button class="btn" data-num="5">5</button>
+        <button class="btn" data-num="6">6</button>
+        <button class="btn" data-num="7">7</button>
+        <button class="btn" data-num="8">8</button>
+        <button class="btn" data-num="9">9</button>
+        <button class="btn clear" id="clear">Xóa</button>
+        <button class="btn" data-num="0">0</button>
+        <button class="btn enter" id="enter">Chốt</button>
+      </div>
+    </div>
+
+    <!-- Modal thông báo lỗi -->
+    <div id="errorModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>😅 Ai cơ?, gõ cửa nhầm nhà à!</h2>
+        <p id="errorMessage">
+          <b><i>Hưng Đinh</i> hổng có biết người này!</b>
+        </p>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
