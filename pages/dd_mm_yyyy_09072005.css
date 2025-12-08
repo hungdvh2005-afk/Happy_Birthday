@@ -255,6 +255,10 @@ body::before {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .container {
+    padding: 20px 15px;
+  }
+
   .profile-card {
     padding: 30px 20px;
     border-radius: 25px;
@@ -328,29 +332,5 @@ body::before {
 
   .back-btn {
     padding: 12px 25px;
-  }
-}
-
-@media (max-width: 360px) {
-  .profile-card {
-    padding: 20px 12px;
-  }
-
-  .avatar {
-    width: 110px;
-    height: 110px;
-  }
-
-  .info-item {
-    padding: 12px 10px;
-  }
-
-  .info-icon {
-    font-size: 24px;
-  }
-
-  .qr-code {
-    width: 140px;
-    height: 140px;
   }
 }
