@@ -256,7 +256,8 @@ body::before {
 /* ---------- MOBILE 768px ---------- */
 @media (max-width: 768px) {
   body {
-    padding: 15px;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 
   .profile-card {
