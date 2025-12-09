@@ -41,6 +41,12 @@ musicBtn.addEventListener("click", () => {
   isPlaying = !isPlaying;
 });
 
+const overlay = document.getElementById("wishOverlay");
+
+overlay.addEventListener("click", () => {
+  overlay.classList.add("hidden");
+});
+
 // ===== ÂM THANH PHÁO GIẤY =====
 const phaoSound = new Audio("../music/phaogiay.mp3");
 const loiChucSound = new Audio("../music/loichuc.mp3");
