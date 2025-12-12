@@ -134,7 +134,8 @@ document.getElementById("clear").onclick = () => {
 // Cập nhật màn hình
 function updateScreen() {
   if (input.length === 0) {
-    screen.innerHTML = '<span class="placeholder">Ngày / Tháng / Năm</span>';
+    screen.innerHTML =
+      '<span class="placeholder"> Có mỗi cái ngày sinh mà nhập đi nhập lại còn không xong nữa :>> </span>';
   } else if (input.length <= 2) {
     screen.textContent = input;
   } else if (input.length <= 4) {
