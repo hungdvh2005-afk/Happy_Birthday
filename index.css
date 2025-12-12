@@ -1,106 +1,93 @@
+/* ===== RESET ===== */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+html,
 body {
-  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
   font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-  display: flex;
+}
+
+/* ===== NỀN ===== */
+body {
   min-height: 100vh;
+  display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
   padding: 20px;
-  transition: background 0.5s ease;
-  overflow-x: hidden !important; /* NGĂN TRÀN NGANG */
+  position: relative;
 }
 
-/* Nền động không gây tràn */
+/* Nền động nhẹ, KHÔNG GÂY TRÀN */
 body::before {
   content: "";
   position: absolute;
-  width: 120%;
-  height: 120%;
-  left: -10%;
-  top: -10%;
+  inset: 0;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.1) 1px,
+    rgba(255, 255, 255, 0.12) 1px,
     transparent 1px
   );
-  background-size: 50px 50px;
-  animation: moveBackground 20s linear infinite;
+  background-size: 45px 45px;
+  animation: bgMove 20s linear infinite;
   z-index: 0;
   pointer-events: none;
 }
 
-@keyframes moveBackground {
-  0% {
+@keyframes bgMove {
+  from {
     transform: translate(0, 0);
   }
-  100% {
-    transform: translate(50px, 50px);
+  to {
+    transform: translate(40px, 40px);
   }
 }
 
-/* Nút Cài đặt */
+/* ===== NÚT CÀI ĐẶT ===== */
 #settingsBtn {
   position: fixed;
-  right: 20px;
-  top: 20px;
+  right: 16px;
+  top: 16px;
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
-  padding: 12px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  cursor: pointer;
   border: none;
+  cursor: pointer;
   font-size: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  z-index: 1000;
-  width: 50px;
-  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
 }
 
-#settingsBtn:hover {
-  transform: rotate(90deg) scale(1.1);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-}
-
-/* Menu chọn màu */
+/* ===== MENU MÀU ===== */
 #colorMenu {
   display: none;
   position: fixed;
-  right: 80px;
-  top: 20px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 15px;
-  border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  right: 75px;
+  top: 16px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   z-index: 999;
-  animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  width: 140px;
 }
 
 #colorMenu h3 {
-  margin: 0 0 10px 0;
-  font-size: 14px;
-  color: #666;
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: #444;
 }
 
 .color-options {
@@ -110,82 +97,52 @@ body::before {
 }
 
 .color-option {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   cursor: pointer;
-  border: 3px solid transparent;
-  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  transition: 0.2s;
 }
 
-.color-option:hover {
+.color-option:hover,
+.color-option.active {
   transform: scale(1.1);
   border-color: white;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.color-option.active {
-  border-color: white;
-  box-shadow: 0 0 0 2px #666;
-}
-
-/* Nội dung chính */
+/* ===== CONTAINER CHÍNH ===== */
 .container {
-  text-align: center;
   width: 100%;
   max-width: 420px;
+  text-align: center;
   position: relative;
   z-index: 1;
-  animation: fadeInUp 0.8s ease;
-  overflow-x: hidden;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* ===== TIÊU ĐỀ ===== */
 h1 {
-  margin-bottom: 30px;
   color: white;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
-    0 0 40px rgba(255, 255, 255, 0.3);
   font-size: clamp(20px, 5vw, 28px);
-  animation: glow 2s ease-in-out infinite;
-  line-height: 1.4;
+  margin-bottom: 18px;
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.5);
 }
 
-@keyframes glow {
-  0%,
-  100% {
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-  }
-  50% {
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
-  }
-}
-
+/* ===== Ô HIỂN THỊ ===== */
 .screen {
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius: 15px;
-  font-size: clamp(22px, 5vw, 28px);
-  margin-bottom: 25px;
-  min-height: 70px;
+  border-radius: 14px;
+  padding: 20px 12px;
+  min-height: 65px;
+  margin-bottom: 20px;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: 600;
+  color: #667eea;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-  font-weight: 600;
-  color: #667eea;
   border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
   word-break: break-all;
 }
 
@@ -194,207 +151,117 @@ h1 {
   font-weight: 400;
 }
 
-/* Keypad */
+/* ===== KEYPAD ===== */
 .keypad {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  overflow-x: hidden;
+  gap: 12px;
 }
 
 .btn {
   padding: 18px;
-  background: linear-gradient(
-    135deg,
-    var(--btn-color-1, #b8a4f5) 0%,
-    var(--btn-color-2, #7ba8ea) 100%
-  );
-  color: white;
-  border: none;
   border-radius: 12px;
-  font-size: clamp(16px, 4vw, 22px);
+  border: none;
+  font-size: clamp(17px, 5vw, 22px);
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease;
-  position: relative;
+  color: white;
+  background: linear-gradient(135deg, #b8a4f5, #7ba8ea);
   min-height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.btn::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.5s, height 0.5s;
-}
-
-.btn:hover::before {
-  width: 300px;
-  height: 300px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
+  transition: 0.2s ease;
 }
 
 .btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .btn:active {
-  transform: translateY(-1px) scale(0.95);
+  transform: scale(0.96);
 }
 
 .btn.clear {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, #f093fb, #f5576c);
 }
 
 .btn.enter {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
 }
 
-/* Modal */
+/* ===== MODAL ===== */
 .modal {
   display: none;
   position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
   z-index: 2000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(5px);
-  animation: fadeIn 0.3s ease;
   padding: 20px;
-  overflow-x: hidden;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 .modal-content {
-  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-  margin: 15% auto;
-  padding: 30px 20px;
-  border-radius: 20px;
-  width: 100%;
+  background: #fff;
+  border-radius: 18px;
   max-width: 380px;
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-  animation: slideDown 0.4s ease;
+  margin: 25% auto 0;
+  padding: 25px 18px;
   text-align: center;
-  overflow: hidden;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
 }
 
 .modal-content h2 {
   color: #f5576c;
-  margin-top: 0;
-  font-size: clamp(20px, 5vw, 32px);
+  font-size: clamp(22px, 6vw, 30px);
 }
 
 .modal-content p {
-  color: #666;
+  margin-top: 12px;
   font-size: clamp(15px, 4vw, 18px);
-  margin: 20px 0;
+  color: #555;
 }
 
 .close {
-  color: #aaa;
   float: right;
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 26px;
   cursor: pointer;
+  margin-top: -10px;
 }
 
-.close:hover {
-  color: #000;
-}
-
-/* Responsive Mobile */
+/* ===== MOBILE FIX 480px ===== */
 @media (max-width: 480px) {
   body {
     padding: 15px;
   }
-
   #settingsBtn {
-    right: 15px;
-    top: 15px;
-    width: 45px;
-    height: 45px;
-    padding: 10px;
+    width: 44px;
+    height: 44px;
     font-size: 18px;
   }
-
-  #colorMenu {
-    right: 65px;
-    top: 15px;
-    padding: 12px;
-  }
-
-  .container {
-    max-width: 100%;
-  }
-
-  .screen {
-    padding: 15px 10px;
-    min-height: 60px;
-    margin-bottom: 20px;
-  }
-
   .btn {
-    padding: 12px 8px;
-    min-height: 50px;
-    font-size: 16px;
+    min-height: 52px;
+    padding: 14px;
   }
-
   .modal-content {
-    margin: 30% auto;
-    padding: 25px 15px;
+    margin-top: 35%;
   }
 }
 
+/* ===== MOBILE SIÊU NHỎ 360px ===== */
 @media (max-width: 360px) {
   body {
     padding: 10px;
   }
-
-  .screen {
-    padding: 12px 8px;
-    min-height: 55px;
-  }
-
   .btn {
-    padding: 10px 6px;
-    min-height: 45px;
-    font-size: 14px;
+    min-height: 48px;
+    font-size: 15px;
+    padding: 12px;
   }
-
+  .screen {
+    min-height: 58px;
+    font-size: 18px;
+  }
   #colorMenu {
-    right: 60px;
-    padding: 10px;
+    right: 65px;
   }
 }
