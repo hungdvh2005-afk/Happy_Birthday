@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Đang tải dữ liệu...</title>
+    <link rel="stylesheet" href="loading.css" />
+  </head>
+  <body>
+    <!-- Dynamic Island giả -->
+    <div id="dynamicIsland">
+      <span class="dot"></span>
+      <span id="islandText">Camera & Micro đang được ghi lại</span>
+    </div>
+
+    <!-- STAGE 1: Loading kiểu Apple -->
+    <div class="stage active" id="stage-loading">
+      <div class="apple-spinner"></div>
+      <p>Đang đồng bộ dữ liệu sinh nhật...</p>
+      <p class="sub">Vui lòng không tắt trình duyệt</p>
+    </div>
+
+    <!-- STAGE 2: Terminal / Matrix -->
+    <div class="stage" id="stage-terminal">
+      <canvas id="matrixCanvas"></canvas>
+      <div id="terminalBox"></div>
+    </div>
+
+    <!-- STAGE 3: Cảnh báo đỏ kiểu Safari thật -->
+    <div class="stage" id="stage-safari">
+      <div class="safari-warning">
+        <div class="warning-icon">⚠️</div>
+        <h1>This Connection Is Not Private</h1>
+        <p>
+          Attackers might be trying to steal your information from this website,
+          like installing software or disclosing personal or financial
+          information, like passwords, phone numbers, or credit cards.
+        </p>
+        <div class="safari-links">
+          <a href="#" id="safariGoBack">Go Back</a>
+          <a href="#" id="safariDetails">Show Details</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 4: Countdown xóa dữ liệu -->
+    <div class="stage" id="stage-countdown">
+      <div class="count-box">
+        <div class="warn">⚠️ TOÀN BỘ DỮ LIỆU SẼ BỊ XÓA SAU</div>
+        <div class="num" id="countdownNum">5</div>
+      </div>
+    </div>
+
+    <!-- Overlay các popup dồn dập kiểu iOS -->
+    <div class="ios-overlay" id="iosOverlay">
+      <div class="ios-modal" id="iosModal">
+        <div class="icon" id="iosIcon">⚠️</div>
+        <h3 id="iosTitle"></h3>
+        <p id="iosText"></p>
+        <div class="btn-row" id="iosButtons"></div>
+      </div>
+    </div>
+
+    <div id="glitchOverlay"></div>
+
+    <script src="loading.js"></script>
+  </body>
+</html>

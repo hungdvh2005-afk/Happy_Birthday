@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday 🎉</title>
+    <link rel="stylesheet" href="dd_mm_yyyy_28072005.css" />
+  </head>
+  <body>
+    <canvas id="confetti"></canvas>
+
+    <div class="container">
+      <!-- ⚠️ SỬA: đổi TÊN BẠN cho đúng -->
+      <h1 class="title">🎉 Happy birthday, DUC MANH 🎉</h1>
+      <p class="date">
+        <b><u>28/07/2005</u></b>
+      </p>
+
+      <div class="wish-card">
+        <div class="wish-overlay" id="wishOverlay">
+          <!-- ⚠️ SỬA: đổi ảnh cover -->
+          <img src="../images/anhbup.jpg" alt="Cover" />
+          <div class="overlay-text">
+            Ngon luôn!<br />
+            "Bụp" một cái vào đây để biến hình nào!
+          </div>
+        </div>
+
+        <!-- ⚠️ SỬA: đổi lời chúc cho hợp với thằng bạn m -->
+        <p class="wish-text">
+          Y như cái tên! Mạnh thíiiiiii... Không biết nói gì hơn, thôi thì Chúc
+          mừng sinh nhật bạn tôi, tối nay (hôm nao thì không biết :>>) chức m
+          sinh nhật vui vẻ, tuổi mới thật nhiều tiền tài và sức khỏe. Quan trọng
+          là bớt nói LINH TINH , LUYÊN THUYÊN đi nhá, rất là vớ vẩn :>>> Cái này
+          quan trọng hơn này, chúc sớm tìm được em gái mưa ạ (Không biết em gái
+          mưa là ai thì hỏi Hậu!)
+        </p>
+
+        <p class="wish-text highlight">
+          <span class="line1">Và lời cuối cùng xin gửi:</span>
+          <span class="line2">Thế nào lại Mạnh!</span>
+        </p>
+
+        <p class="signature">
+          [Thân gửi] <br />— Nhóm 2 —<br />
+          (Nhóm 1 chưa thấy gửi lời chúc :>>)
+        </p>
+      </div>
+
+      <!-- ẢNH KỶ NIỆM: thay src bên dưới bằng ảnh thật -->
+      <div class="images-grid">
+        <div class="image-card">
+          <img src="../images/anhsinhnhatmnah1.jpg" alt="Mạnh 1" />
+        </div>
+        <div class="image-card">
+          <img src="../images/anhsinhnhatmanh2.jpg" alt="Mạnh 2" />
+        </div>
+        <div class="image-card">
+          <img src="../images/anhsinhnhatmanh3.jpg" alt="Mạnh 3" />
+        </div>
+        <div class="image-card">
+          <img src="../images/anhsinhnhatmanh4.jpg" alt="Mạnh 4" />
+        </div>
+      </div>
+
+      <!-- VIDEO KỶ NIỆM: thay src bằng video thật, poster là ảnh chờ -->
+      <div class="video-section">
+        <video
+          id="memoryVideo"
+          controls
+          playsinline
+          poster="../images/video-poster.jpg"
+        >
+          <source src="../videos/videosnmanh.mp4" type="video/mp4" />
+          Trình duyệt của m không hỗ trợ video, cập nhật đi rồi xem :))
+        </video>
+      </div>
+
+      <div class="controls">
+        <button class="control-btn music-btn" id="musicBtn">
+          <span class="icon">🎵</span>
+          <span class="text">Lên nhạc</span>
+        </button>
+        <button class="control-btn confetti-btn" id="confettiBtn">
+          <span class="icon">🎉</span>
+          <span class="text">Lổ pháo</span>
+        </button>
+      </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+      <!-- ⚠️ SỬA: đổi nhạc nền -->
+      <source src="../music/Happy.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="dd_mm_yyyy_28072005.js"></script>
+  </body>
+</html>

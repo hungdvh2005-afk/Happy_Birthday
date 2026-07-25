@@ -7,11 +7,26 @@ const settingsBtn = document.getElementById("settingsBtn");
 
 let input = "";
 
-// Danh sách ngày sinh được cài đặt
+// ⚠️ danh sách ngày sinh được phép nhập (định dạng ddmmyyyy)
 const validBirthdays = ["13122005", "22102005", "28072005", "09072005"];
 
-// Danh sách ngày sinh đã có trang riêng
-const availablePages = ["13122005", "09072005"];
+// ⚠️ những ngày sinh đã có trang chúc mừng riêng
+// target = trang chúc mừng chính
+// loading = tên file loading dùng riêng cho người này (để null nếu không muốn troll, đi thẳng vào target luôn)
+const availablePages = {
+  28072005: {
+    target: "dd_mm_yyyy_28072005.html",
+    loading: "loading.html",
+  },
+  13122005: {
+    target: "dd_mm_yyyy_13122005.html",
+    loading: null, // ví dụ: đứa này không troll, vào thẳng luôn
+  },
+  "09072005": {
+    target: "dd_mm_yyyy_09072005.html",
+    loading: null, // ví dụ: đứa này sau làm 1 kiểu loading khác
+  },
+};
 
 // Danh sách theme màu
 const themes = [
@@ -84,21 +99,16 @@ document.querySelectorAll(".color-option").forEach((option) => {
     const themeIndex = parseInt(option.dataset.theme);
     currentTheme = themeIndex;
 
-    // Cập nhật active state
     document
       .querySelectorAll(".color-option")
       .forEach((opt) => opt.classList.remove("active"));
     option.classList.add("active");
 
-    // Áp dụng theme
     applyTheme(themeIndex);
-
-    // Đóng menu
     colorMenu.style.display = "none";
   });
 });
 
-// Áp dụng theme
 function applyTheme(index) {
   const theme = themes[index];
   document.body.style.background = theme.bg;
@@ -106,7 +116,6 @@ function applyTheme(index) {
   document.documentElement.style.setProperty("--btn-color-2", theme.btn2);
 }
 
-// Khởi tạo theme mặc định
 applyTheme(0);
 
 // Xử lý nhập số
@@ -116,7 +125,6 @@ document.querySelectorAll(".btn[data-num]").forEach((btn) => {
       input += btn.dataset.num;
       updateScreen();
 
-      // Hiệu ứng click
       btn.style.transform = "scale(0.95)";
       setTimeout(() => {
         btn.style.transform = "";
@@ -153,26 +161,28 @@ document.getElementById("enter").onclick = () => {
     return;
   }
 
-  // Kiểm tra ngày sinh có trong danh sách không
   if (!validBirthdays.includes(input)) {
     showError("Hưng Đinh không biết người này! 🤔");
     return;
   }
 
-  // Kiểm tra có trang riêng chưa
-  if (!availablePages.includes(input)) {
-    // Chưa có trang riêng, chuyển sang trang "chưa đến"
+  const entry = availablePages[input];
+
+  if (!entry) {
+    // Có trong validBirthdays nhưng chưa làm trang riêng
     window.location.href = "pages/chuaco.html";
     return;
   }
 
-  // Nếu có trang riêng thì chuyển trang
-  const dd = input.slice(0, 2);
-  const mm = input.slice(2, 4);
-  const yyyy = input.slice(4);
-
-  const filename = `dd_mm_yyyy_${dd}${mm}${yyyy}.html`;
-  window.location.href = `pages/${filename}`;
+  if (entry.loading) {
+    // Đi qua màn loading troll riêng của người này trước
+    window.location.href = `pages/${entry.loading}?target=${encodeURIComponent(
+      entry.target,
+    )}`;
+  } else {
+    // Không troll, vào thẳng trang chúc mừng
+    window.location.href = `pages/${entry.target}`;
+  }
 };
 
 // Hiển thị modal lỗi
@@ -181,7 +191,6 @@ function showError(message) {
   errorModal.style.display = "block";
 }
 
-// Đóng modal
 closeBtn.onclick = () => {
   errorModal.style.display = "none";
 };

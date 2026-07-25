@@ -1,0 +1,382 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Arial,
+    sans-serif;
+  min-height: 100vh;
+  position: relative;
+}
+
+.stage {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.stage.active {
+  display: flex;
+}
+
+/* ========== STAGE 1: LOADING KIỂU APPLE ========== */
+#stage-loading {
+  background: #f2f2f7;
+}
+
+.apple-spinner {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 4px solid #d8d8dc;
+  border-top-color: #8e8e93;
+  animation: spin 0.9s linear infinite;
+  margin-bottom: 22px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#stage-loading p {
+  color: #6e6e73;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+#stage-loading .sub {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #a1a1a6;
+  font-weight: 400;
+}
+
+/* ========== STAGE 2: TERMINAL / MATRIX ========== */
+#stage-terminal {
+  background: #000;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+#matrixCanvas {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+}
+
+#terminalBox {
+  position: relative;
+  z-index: 2;
+  padding: 40px 20px;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  color: #00ff6a;
+  font-size: clamp(12px, 3.2vw, 16px);
+  line-height: 1.9;
+  text-shadow: 0 0 6px rgba(0, 255, 106, 0.5);
+}
+
+#terminalBox .line {
+  opacity: 0;
+  animation: lineIn 0.25s forwards;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+@keyframes lineIn {
+  to {
+    opacity: 1;
+  }
+}
+
+#terminalBox .cursor {
+  display: inline-block;
+  width: 9px;
+  height: 1em;
+  background: #00ff6a;
+  vertical-align: middle;
+  animation: blink 0.8s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ========== STAGE 3: CẢNH BÁO ĐỎ KIỂU SAFARI THẬT ========== */
+#stage-safari {
+  background: #fc3b30;
+}
+
+.safari-warning {
+  max-width: 480px;
+  width: 100%;
+  padding: 40px 30px;
+  text-align: center;
+  color: #fff;
+}
+
+.safari-warning .warning-icon {
+  font-size: 42px;
+  margin-bottom: 22px;
+}
+
+.safari-warning h1 {
+  font-size: clamp(22px, 6vw, 30px);
+  font-weight: 700;
+  margin-bottom: 18px;
+  line-height: 1.3;
+}
+
+.safari-warning p {
+  font-size: clamp(15px, 4vw, 18px);
+  line-height: 1.6;
+  margin-bottom: 36px;
+  font-weight: 400;
+  opacity: 0.95;
+}
+
+.safari-links {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.safari-links a {
+  color: #fff;
+  text-decoration: underline;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.safari-links a:first-child {
+  font-weight: 700;
+  font-size: 19px;
+}
+
+/* ========== DYNAMIC ISLAND GIẢ ========== */
+#dynamicIsland {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%, -80px);
+  background: #000;
+  color: #fff;
+  border-radius: 24px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 9999;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 90vw;
+}
+
+#dynamicIsland.show {
+  transform: translate(-50%, 0);
+}
+
+#dynamicIsland .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff3b30;
+  flex-shrink: 0;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* ========== iOS GLASSMORPHISM MODAL (popup dồn dập) ========== */
+.ios-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.ios-overlay.active {
+  display: flex;
+}
+
+.ios-modal {
+  width: 100%;
+  max-width: 300px;
+  background: rgba(250, 250, 252, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 16px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  animation: popIn 0.22s ease;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.ios-modal .icon {
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.ios-modal h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1c1c1e;
+  margin: 10px 18px 4px;
+}
+
+.ios-modal p {
+  font-size: 13px;
+  color: #3c3c43;
+  margin: 0 18px 16px;
+  line-height: 1.5;
+}
+
+.ios-modal .btn-row {
+  display: flex;
+  border-top: 1px solid rgba(60, 60, 67, 0.25);
+}
+
+.ios-modal button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 13px 8px;
+  font-size: 16px;
+  color: #007aff;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.ios-modal button:first-child {
+  border-right: 1px solid rgba(60, 60, 67, 0.25);
+  color: #3c3c43;
+}
+
+.ios-modal button.danger {
+  font-weight: 600;
+}
+
+.ios-modal.single .btn-row button {
+  font-weight: 600;
+}
+
+/* ========== STAGE COUNTDOWN ========== */
+#stage-countdown {
+  background: #000;
+}
+
+#stage-countdown .count-box {
+  text-align: center;
+  color: #fff;
+}
+
+#stage-countdown .warn {
+  font-size: clamp(15px, 4vw, 20px);
+  color: #ff453a;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: 0.3px;
+}
+
+#stage-countdown .num {
+  font-size: clamp(70px, 22vw, 130px);
+  font-weight: 800;
+  color: #ff453a;
+  text-shadow: 0 0 40px rgba(255, 69, 58, 0.7);
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(1.4);
+    opacity: 0.3;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ========== GLITCH / BOOM TRANSITION ========== */
+#glitchOverlay {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 5000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#glitchOverlay.boom {
+  animation: boom 0.6s ease forwards;
+}
+
+@keyframes boom {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+    background: #fff;
+  }
+  30% {
+    opacity: 0.2;
+    background: #ff453a;
+  }
+  45% {
+    opacity: 1;
+    background: #fff;
+  }
+  100% {
+    opacity: 1;
+    background: #fff;
+  }
+}
+
+@media (max-width: 480px) {
+  .ios-modal {
+    max-width: 260px;
+  }
+}
