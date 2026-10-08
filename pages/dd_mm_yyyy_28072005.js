@@ -41,8 +41,12 @@ overlay.addEventListener("click", () => {
 });
 
 // ===== ÂM THANH PHÁO GIẤY =====
-const phaoSound = new Audio("../music/phaogiay.mp3");
-const loiChucSound = new Audio("../music/loichuc.mp3");
+const phaoSound = new Audio(
+  "https://res.cloudinary.com/qpuqus9n/video/upload/v1791449159/phaogiay.mp3",
+);
+const loiChucSound = new Audio(
+  "https://res.cloudinary.com/qpuqus9n/video/upload/v1791449158/loichuc.mp3",
+);
 
 function playPhaoSound() {
   phaoSound.currentTime = 0;
