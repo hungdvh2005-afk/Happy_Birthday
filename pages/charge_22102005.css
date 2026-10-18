@@ -230,3 +230,7 @@ body {
     transform: translateY(110vh) rotate(720deg);
   }
 }
+html,
+body {
+  overscroll-behavior: none;
+}

@@ -1,16 +1,51 @@
-// ===== NHẠC NỀN =====
+// ===== NHẠC NỀN - TỰ ĐỘNG PHÁT =====
 const bgMusic = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
+
+// Nhãn nút luôn đổi theo trạng thái thật của nhạc
+bgMusic.addEventListener("play", () => (musicBtn.textContent = "⏸️ Tạm nínnn"));
+bgMusic.addEventListener(
+  "pause",
+  () => (musicBtn.textContent = "▶️ Tiếp đeee"),
+);
+
 musicBtn.onclick = () => {
-  if (bgMusic.paused) {
-    bgMusic.play().catch(() => {});
-    musicBtn.textContent = "⏸️ Tạm nínnn";
-  } else {
-    bgMusic.pause();
-    musicBtn.textContent = "▶️ Tiếp đeee";
-  }
+  if (bgMusic.paused) bgMusic.play().catch(() => {});
+  else bgMusic.pause();
 };
 
+// Tự phát sau 6 giây khi vào trang
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    bgMusic.play().catch(() => {
+      // Bị trình duyệt chặn thì phát ở lần chạm đầu tiên (trừ khi chạm đúng nút nhạc)
+      addEventListener(
+        "pointerdown",
+        (e) => {
+          if (!e.target.closest("#musicBtn")) bgMusic.play().catch(() => {});
+        },
+        { once: true },
+      );
+    });
+  }, 6000);
+});
+
+// ===== ÂM THANH PHÁO + LỜI CHÚC =====
+const phaoSound = new Audio(
+  "https://res.cloudinary.com/qpuqus9n/video/upload/v1791449159/phaogiay.mp3",
+);
+const loiChucSound = new Audio(
+  "https://res.cloudinary.com/qpuqus9n/video/upload/v1791449158/loichuc.mp3",
+);
+function playBang() {
+  phaoSound.currentTime = 0;
+  phaoSound.play().catch(() => {});
+  setTimeout(() => {
+    loiChucSound.currentTime = 0;
+    loiChucSound.play().catch(() => {});
+  }, 3000); // lời chúc vào sau 3s như bên 13122005
+  setTimeout(startConfetti, 2000); // pháo giấy bung sau tiếng nổ 2s
+}
 // ===== PHÁO GIẤY =====
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
@@ -69,5 +104,5 @@ function loop() {
   });
   requestAnimationFrame(loop);
 }
-document.getElementById("confettiBtn").onclick = () => startConfetti();
-window.addEventListener("load", () => setTimeout(startConfetti, 500)); // bắn khi vào trang
+document.getElementById("confettiBtn").onclick = playBang;
+window.addEventListener("load", () => setTimeout(playBang, 500));

@@ -26,6 +26,11 @@ const toastEl = $("toast");
 let W, H, PW, PH;
 let ph = { x: 0, y: 0, tx: 0, ty: 0 }; // vị trí điện thoại (x,y) và đích (tx,ty)
 let pl = { x: 0, y: 0 }; // tâm đầu cáp
+
+let cool = false,
+  lastX = 0,
+  lastY = 0;
+
 let drag = null,
   hold = null,
   toggled = false,
@@ -105,6 +110,8 @@ phone.addEventListener("pointerdown", (e) => {
   updPin();
 });
 addEventListener("pointermove", (e) => {
+  lastX = e.clientX;
+  lastY = e.clientY;
   if (!drag || e.pointerId !== drag.id || busy) return;
   const nx = clamp(e.clientX - drag.ox, 17, W - 17);
   const ny = clamp(e.clientY - drag.oy, 40, H - 32);
@@ -143,12 +150,16 @@ addEventListener("resize", layout);
 
 // ===== LUẬT CHƠI =====
 function pushAway() {
-  // chưa giữ điện thoại mà cắm: đẩy điện thoại ra xa
-  busy = true;
-  ph.ty = clamp(ph.ty - 130, 40, H - PH - 70);
+  cool = true;
+  pl.y = clamp(pl.y + 110, 40, H - 32); // đẩy cáp tụt xuống
+  ph.ty = clamp(ph.ty - 60, 40, H - PH - 70);
+  if (drag) {
+    drag.ox = lastX - pl.x;
+    drag.oy = lastY - pl.y;
+  }
   toast(MSG.hold);
   count();
-  setTimeout(() => (busy = false), 700);
+  setTimeout(() => (cool = false), 700);
 }
 function connect() {
   busy = true;
@@ -212,7 +223,7 @@ function frame() {
     "d",
     `M${W / 2} ${H + 10} C${W / 2} ${my},${pl.x} ${my},${pl.x} ${pl.y + 30}`,
   );
-  if (!busy && !done && drag) {
+  if (!busy && !cool && !done && drag) {
     const p = port();
     const d = Math.hypot(pl.x - p.x, pl.y - 32 - p.y);
     if (d < SNAP && pinned()) connect();
