@@ -1,0 +1,63 @@
+:root {
+  --bg: linear-gradient(135deg, #1b2540, #3b5a8f);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  height: 100dvh;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", Arial, sans-serif;
+  transition: opacity 0.3s;
+}
+body.fade {
+  opacity: 0;
+}
+/* Mobile: full màn hình. Laptop: video dọc nằm giữa */
+video {
+  width: 100vw;
+  height: 100dvh;
+  object-fit: cover;
+  background: #000;
+}
+@media (min-aspect-ratio: 1/1) {
+  video {
+    width: auto;
+    aspect-ratio: 9 / 16;
+    object-fit: contain;
+  }
+}
+#startScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  background: var(--bg);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+#startScreen h2 {
+  margin: 0;
+  font-size: clamp(20px, 5vw, 28px);
+  line-height: 1.4;
+}
+#startBtn {
+  padding: 18px 36px;
+  font-size: 20px;
+  font-weight: 700;
+  border: 0;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}

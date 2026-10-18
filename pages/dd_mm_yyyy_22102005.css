@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(
+    135deg,
+    #dbe7ff 0%,
+    #f3d9ff 100%
+  ); /* màu tạm: tông mưa, đổi tuỳ ý */
+}
+#confetti {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 10px;
+  position: relative;
+  z-index: 1;
+}
+.title {
+  text-align: center;
+  font-size: clamp(24px, 6vw, 42px);
+  color: #6b5bd2;
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+.date {
+  text-align: center;
+  font-size: clamp(18px, 4vw, 24px);
+  color: #8f7fe8;
+  margin-bottom: 26px;
+}
+.wish-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 34px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+.wish-text {
+  font-size: clamp(16px, 3.5vw, 19px);
+  line-height: 1.8;
+  color: #555;
+  text-align: justify;
+}
+.signature {
+  text-align: right;
+  font-style: italic;
+  font-weight: 600;
+  margin-top: 22px;
+  color: #444;
+}
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 34px;
+}
+.image-card {
+  border-radius: 15px;
+  overflow: hidden;
+  background: #e9e4fb;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+.image-card img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  display: block;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+.control-btn {
+  padding: 14px 28px;
+  border: 0;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #8f7fe8, #6b5bd2);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+#confettiBtn {
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+}
+@media (max-width: 480px) {
+  .image-card img {
+    height: 150px;
+  }
+  .control-btn {
+    width: 100%;
+  }
+}

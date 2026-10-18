@@ -7,10 +7,10 @@ const settingsBtn = document.getElementById("settingsBtn");
 
 let input = "";
 
-// ⚠️ danh sách ngày sinh được phép nhập (định dạng ddmmyyyy)
+// Danh sách hợp lệ
 const validBirthdays = ["13122005", "22102005", "28072005", "09072005"];
 
-// ⚠️ những ngày sinh đã có trang chúc mừng riêng
+// Cmsn riêng - null
 // target = trang chúc mừng chính
 // loading = tên file loading dùng riêng cho người này (để null nếu không muốn troll, đi thẳng vào target luôn)
 const availablePages = {
@@ -20,11 +20,15 @@ const availablePages = {
   },
   13122005: {
     target: "dd_mm_yyyy_13122005.html",
-    loading: null, // ví dụ: đứa này không troll, vào thẳng luôn
+    loading: null, // đứa này không troll, vào thẳng luôn
   },
   "09072005": {
     target: "dd_mm_yyyy_09072005.html",
-    loading: null, // ví dụ: đứa này sau làm 1 kiểu loading khác
+    loading: null,
+  },
+  22102005: {
+    target: "dd_mm_yyyy_22102005.html",
+    loading: "loading_22102005.html",
   },
 };
 
