@@ -3,57 +3,109 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy Birthday Hai Hau🎂</title>
+    <title>Happy Birthday Hai Hau 🎂</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="dd_mm_yyyy_22102005.css" />
   </head>
   <body>
+    <!-- Canvas Pháo giấy -->
     <canvas id="confetti"></canvas>
+
+    <!-- Các Icon (Mưa, em gái, điện thoại, sạc...) bay nền -->
+    <div class="float-layer" id="floatLayer" aria-hidden="true"></div>
+
     <div class="container">
       <h1 class="title">🎉 Happy birthday, HAI HAU 🎉</h1>
+
       <p class="date">
         <b><u>22/10/2005</u></b>
       </p>
+
       <div class="wish-card">
+        <!-- Lớp phủ câu hỏi Quiz -->
+        <div class="quiz-overlay" id="quizOverlay">
+          <p class="quiz-q">Bạn đã từng là em gái mưa đúng không? 🌧️</p>
+          <div class="quiz-btns">
+            <button class="quiz-btn yes" id="yesBtn">Vâng, đúng ạ!</button>
+            <button class="quiz-btn no" id="noBtn">Không, sai bét!</button>
+          </div>
+        </div>
+
+        <!-- Nội dung thư chúc giữ NGUYÊN BẢN 100% -->
         <p class="wish-text">
           Thật sự là t biết chắc là cái này sẽ không gửi đúng ngày sinh nhật đâu
           nên là cứ làm trước :>> ko biết nó được ném qua lúc đang đi chơi hay
-          đi chơi về nữa :)) dù nó được gửi vào thời điểm nào thì cũng là 1 lời
-          chức từ Hưng Đinh r nhé! Kết thúc chuối Happy Birthday xàm xàm này
-          :>>> tuổi trẻ mà, ai chả có lúc hết pin, ai chả có lúc "ướt áo" nhưng
-          suy cho cùng, ai cũng có ngày sinh nhật không phải của riêng mình mà
-          còn chung với rất nhiều người khác mà bản thân không biết nữa,...t
-          cũng ko biết đang viết cái gì nữa :>> Thoi chốt lại chúc Hàu sắp tới
-          có 1 ngày sinh nhật vui vẻ, qua sinh nhật càng vui vẻ hơn, tuổi mới áo
-          không ướt, điện thoại luôn đầy pin để có thể đi chơi với bọn t lâu hơn
-          nhé, dù chỉ 1 chút thoi. XIN HẾT!
+          đi chơi về nữa, mà cũng có thể là đúng ngày hoặc sát ngày mới ném :))
+          dù nó được gửi vào thời điểm nào thì cũng là 1 lời chúc từ Hưng Đinh r
+          nhé! Kết thúc chuỗi Happy Birthday xàm xàm này :>>> tuổi trẻ mà, ai
+          chả có lúc hết pin, ai chả có lúc "ướt áo" nhưng suy cho cùng, ai cũng
+          có ngày sinh nhật không phải của riêng mình, ngày này còn chung với
+          rất nhiều người khác mà bản thân không biết nữa,...t cũng chả biết bản
+          thân t đang viết cái gì luôn :>> Thoi dù là lời lúc say hay lúc tỉnh
+          thì lời nhắn nhủ chính vẫn là: chúc Hàu sắp tới có 1 ngày sinh nhật
+          vui vẻ (chắc là vài hôm nữa thôi), qua sinh nhật tuổi 21 càng vui vẻ
+          hơn, tuổi mới áo không ướt, điện thoại luôn đầy pin để có thể đi chơi
+          với bọn t lâu hơn nhé, dù chỉ 1 chút :>>. XIN HẾT! (Tóm lại vẫn phải
+          là đúng ngày :>>)
         </p>
+
         <p class="signature">— Hưng Đinh —</p>
       </div>
+
+      <!-- Ảnh kỷ niệm khung Polaroid -->
       <div class="images-grid">
         <div class="image-card">
-          <img src="../images/22102005_1.jpg" alt="Kỷ niệm 1" />
+          <img
+            src="https://res.cloudinary.com/qpuqus9n/image/upload/v1792590913/HoangHau1.jpg"
+            alt="Hoàng Hậu 1"
+          />
         </div>
         <div class="image-card">
-          <img src="../images/22102005_2.jpg" alt="Kỷ niệm 2" />
+          <img
+            src="https://res.cloudinary.com/qpuqus9n/image/upload/v1792589948/HoangHau2.jpg"
+            alt="Hoàng Hậu 2"
+          />
         </div>
         <div class="image-card">
-          <img src="../images/22102005_3.jpg" alt="Kỷ niệm 3" />
+          <img
+            src="https://res.cloudinary.com/qpuqus9n/image/upload/v1792589948/HoangHau3.jpg"
+            alt="Hoàng Hậu 3"
+          />
         </div>
         <div class="image-card">
-          <img src="../images/22102005_4.jpg" alt="Kỷ niệm 4" />
+          <img
+            src="https://res.cloudinary.com/qpuqus9n/image/upload/v1792589947/HoangHau4.jpg"
+            alt="Hoàng Hậu 4"
+          />
         </div>
       </div>
+
+      <!-- Nút bấm -->
       <div class="controls">
-        <button class="control-btn" id="musicBtn">🎵 Lên nhạc</button>
-        <button class="control-btn" id="confettiBtn">🎉 Lổ pháo</button>
+        <button class="control-btn music-btn" id="musicBtn">
+          <span class="icon">🎵</span>
+          <span class="text">Lên nhạc</span>
+        </button>
+        <button class="control-btn confetti-btn" id="confettiBtn">
+          <span class="icon">🎉</span>
+          <span class="text">Lổ pháo</span>
+        </button>
       </div>
     </div>
+
+    <!-- Nhạc nền -->
     <audio id="bgMusic" loop>
       <source
         src="https://res.cloudinary.com/qpuqus9n/video/upload/v1791449162/Happy.mp3"
         type="audio/mpeg"
       />
     </audio>
+
     <script src="dd_mm_yyyy_22102005.js"></script>
   </body>
 </html>

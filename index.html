@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <!-- Trang trí tiệc sinh nhật -->
+    <div class="bunting" id="bunting"></div>
+    <div class="party-layer" id="partyLayer" aria-hidden="true"></div>
+
     <button id="settingsBtn">⚙️</button>
 
     <!-- Menu chọn màu -->
@@ -62,10 +66,23 @@
     </div>
 
     <div class="container">
+      <div class="cake">🎂</div>
       <h1>✨ Nổ thử ngày sinh xem là đứa nào coi ✨</h1>
+      <p class="subtitle">🎉🎉🎉</p>
 
-      <div class="screen" id="screen">
-        <span class="placeholder">dd/mm/yyyy</span>
+      <div class="screen-wrap">
+        <div class="screen" id="screen">
+          <span class="placeholder">dd/mm/yyyy</span>
+        </div>
+        <button
+          type="button"
+          class="cal-btn"
+          id="calBtn"
+          aria-label="Chọn ngày"
+        >
+          📅
+        </button>
+        <input type="date" id="datePicker" class="date-hidden" tabindex="-1" />
       </div>
 
       <div class="keypad">
@@ -78,7 +95,7 @@
         <button class="btn" data-num="7">7</button>
         <button class="btn" data-num="8">8</button>
         <button class="btn" data-num="9">9</button>
-        <button class="btn clear" id="clear">Xóa</button>
+        <button class="btn clear" id="clear">⌫</button>
         <button class="btn" data-num="0">0</button>
         <button class="btn enter" id="enter">Chốt</button>
       </div>
@@ -94,6 +111,48 @@
         </p>
       </div>
     </div>
+
+    <script>
+      // Cờ treo
+      const bunting = document.getElementById("bunting");
+      for (let i = 0; i < 16; i++) {
+        bunting.appendChild(document.createElement("span"));
+      }
+
+      // Confetti + bóng bay
+      const layer = document.getElementById("partyLayer");
+      const colors = [
+        "#ff6b6b",
+        "#feca57",
+        "#48dbfb",
+        "#ff9ff3",
+        "#1dd1a1",
+        "#a29bfe",
+        "#ffffff",
+      ];
+
+      for (let i = 0; i < 40; i++) {
+        const c = document.createElement("i");
+        c.className = "confetti";
+        c.style.left = Math.random() * 100 + "%";
+        c.style.background = colors[i % colors.length];
+        c.style.animationDuration = 6 + Math.random() * 7 + "s";
+        c.style.animationDelay = -Math.random() * 10 + "s";
+        c.style.width = 6 + Math.random() * 6 + "px";
+        c.style.height = 10 + Math.random() * 8 + "px";
+        layer.appendChild(c);
+      }
+
+      for (let i = 0; i < 7; i++) {
+        const b = document.createElement("div");
+        b.className = "balloon";
+        b.style.left = 5 + i * 14 + Math.random() * 6 + "%";
+        b.style.setProperty("--c", colors[i % 6]);
+        b.style.animationDuration = 14 + Math.random() * 8 + "s";
+        b.style.animationDelay = -Math.random() * 14 + "s";
+        layer.appendChild(b);
+      }
+    </script>
 
     <script src="index.js"></script>
   </body>

@@ -1,4 +1,4 @@
-// Hiệu ứng particles nền
+// Canvas Particles Nền mượt mà (Đã sửa các lỗi toán tử - +)
 const canvas = document.createElement("canvas");
 canvas.style.position = "fixed";
 canvas.style.top = "0";
@@ -45,7 +45,7 @@ class Particle {
 }
 
 const particles = [];
-for (let i = 0; i < 60; i++) {
+for (let i = 0; i < 50; i++) {
   particles.push(new Particle());
 }
 
@@ -62,29 +62,29 @@ function animateParticles() {
 
 animateParticles();
 
-// Hiệu ứng hover cho các info-item
-document.querySelectorAll(".info-item").forEach((item, index) => {
-  item.style.animationDelay = `${0.5 + index * 0.2}s`;
-});
+// Hiệu ứng Ripple Click cho nút Quay lại
+const backBtn = document.querySelector(".back-btn");
+if (backBtn) {
+  backBtn.addEventListener("click", function (e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement("span");
+    ripple.style.position = "absolute";
+    ripple.style.borderRadius = "50%";
+    ripple.style.background = "rgba(255, 255, 255, 0.4)";
+    ripple.style.width = "100px";
+    ripple.style.height = "100px";
+    ripple.style.marginLeft = "-50px";
+    ripple.style.marginTop = "-50px";
+    ripple.style.animation = "ripple 0.6s linear";
+    ripple.style.pointerEvents = "none";
+    ripple.style.left = e.clientX - rect.left + "px";
+    ripple.style.top = e.clientY - rect.top + "px";
 
-// Thêm hiệu ứng ripple khi click vào nút
-document.querySelector(".back-btn").addEventListener("click", function (e) {
-  const ripple = document.createElement("span");
-  ripple.style.position = "absolute";
-  ripple.style.borderRadius = "50%";
-  ripple.style.background = "rgba(255, 255, 255, 0.6)";
-  ripple.style.width = "100px";
-  ripple.style.height = "100px";
-  ripple.style.marginLeft = "-50px";
-  ripple.style.marginTop = "-50px";
-  ripple.style.animation = "ripple 0.6s";
-  ripple.style.left = e.clientX - this.offsetLeft + "px";
-  ripple.style.top = e.clientY - this.offsetTop + "px";
+    this.appendChild(ripple);
 
-  this.appendChild(ripple);
-
-  setTimeout(() => ripple.remove(), 600);
-});
+    setTimeout(() => ripple.remove(), 600);
+  });
+}
 
 // Animation CSS cho ripple
 const style = document.createElement("style");
@@ -96,7 +96,7 @@ style.textContent = `
     }
     to {
       opacity: 0;
-      transform: scale(2);
+      transform: scale(2.5);
     }
   }
 `;

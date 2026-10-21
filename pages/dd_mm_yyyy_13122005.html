@@ -4,10 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happy Birthday Mai Heo 🎉</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="dd_mm_yyyy_13122005.css" />
   </head>
   <body>
     <canvas id="confetti"></canvas>
+
+    <!-- Tim, hoa bay nền -->
+    <div class="float-layer" id="floatLayer" aria-hidden="true"></div>
 
     <div class="container">
       <h1 class="title">🎉 Happy birthday, Mai Hoa 🎉</h1>
@@ -25,7 +34,8 @@
           />
           <div class="overlay-text">
             Thánh chỉ tớiiiiiiiiiiiiii<br />
-            Phụng thiên thừa vận, Hưng Đinh chiếu viết
+            Phụng thiên thừa vận, Hưng Đinh chiếu viết<br />
+            <span class="tap-hint">👆 Chạm để mở thánh chỉ</span>
           </div>
         </div>
         <!-- Nội dung chúc mừng -->
@@ -49,7 +59,7 @@
           >
         </p>
 
-        <p class="signature">>>Khâm thử<< <br />— Hưng Đinh —</p>
+        <p class="signature">&gt;&gt;Khâm thử&lt;&lt; <br />— Hưng Đinh —</p>
       </div>
 
       <div class="images-grid">
@@ -97,6 +107,22 @@
         type="audio/mpeg"
       />
     </audio>
+
+    <script>
+      // Tim, hoa bay nền (chỉ trang trí, không đụng tới logic)
+      const floatLayer = document.getElementById("floatLayer");
+      const icons = ["💖", "🌸", "💕", "🌷", "✨", "💗"];
+      for (let i = 0; i < 16; i++) {
+        const s = document.createElement("span");
+        s.className = "float-heart";
+        s.textContent = icons[i % icons.length];
+        s.style.left = Math.random() * 100 + "%";
+        s.style.fontSize = 14 + Math.random() * 18 + "px";
+        s.style.animationDuration = 10 + Math.random() * 10 + "s";
+        s.style.animationDelay = -Math.random() * 15 + "s";
+        floatLayer.appendChild(s);
+      }
+    </script>
 
     <script src="dd_mm_yyyy_13122005.js"></script>
   </body>

@@ -137,9 +137,9 @@ document.querySelectorAll(".btn[data-num]").forEach((btn) => {
   });
 });
 
-// Nút xóa
+// Nút xóa: xóa 1 ký tự cuối
 document.getElementById("clear").onclick = () => {
-  input = "";
+  input = input.slice(0, -1);
   updateScreen();
 };
 
@@ -157,6 +157,34 @@ function updateScreen() {
       input.slice(0, 2) + "/" + input.slice(2, 4) + "/" + input.slice(4);
   }
 }
+
+// Lịch chọn ngày
+const calBtn = document.getElementById("calBtn");
+const datePicker = document.getElementById("datePicker");
+
+calBtn.addEventListener("click", () => {
+  // Đã nhập đủ 8 số thì lịch mở đúng ngày đó, chưa thì mở sẵn năm 2005
+  if (input.length === 8) {
+    datePicker.value =
+      input.slice(4) + "-" + input.slice(2, 4) + "-" + input.slice(0, 2);
+  } else {
+    datePicker.value = "2005-06-15";
+  }
+
+  try {
+    datePicker.showPicker();
+  } catch (err) {
+    datePicker.click();
+  }
+});
+
+datePicker.addEventListener("change", () => {
+  if (!datePicker.value) return;
+  const [y, m, d] = datePicker.value.split("-"); // yyyy-mm-dd
+  input = d + m + y; // ddmmyyyy
+  updateScreen();
+  datePicker.blur();
+});
 
 // Nút OK
 document.getElementById("enter").onclick = () => {

@@ -1,18 +1,30 @@
+/* ===== RESET ===== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
+html,
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Quicksand", "Segoe UI", Arial, sans-serif;
   min-height: 100vh;
   padding: 20px;
   background: linear-gradient(
     135deg,
     #dbe7ff 0%,
-    #f3d9ff 100%
-  ); /* màu tạm: tông mưa, đổi tuỳ ý */
+    #e8dfff 40%,
+    #f3d9ff 70%,
+    #e3d5ff 100%
+  );
+  background-attachment: fixed;
 }
+
+/* ===== CANVAS PHÁO GIẤY ===== */
 #confetti {
   position: fixed;
   inset: 0;
@@ -21,6 +33,42 @@ body {
   pointer-events: none;
   z-index: 9999;
 }
+
+/* ===== ICON BAY MỜ DẦN KHI LÊN TRÊN ===== */
+.float-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.float-item {
+  position: absolute;
+  bottom: -50px;
+  user-select: none;
+  animation: floatUpAndFade linear infinite;
+}
+
+@keyframes floatUpAndFade {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8; /* Hiển thị rõ ở nửa dưới */
+  }
+  50% {
+    opacity: 0.4; /* Mờ dần khi bay lên giữa */
+    transform: translateY(-55vh) translateX(20px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(-110vh) translateX(-15px) rotate(360deg);
+    opacity: 0; /* Biến mất hoàn toàn ở đỉnh màn hình */
+  }
+}
+
+/* ===== KHUNG CHÍNH ===== */
 .container {
   max-width: 900px;
   margin: 0 auto;
@@ -28,78 +76,227 @@ body {
   position: relative;
   z-index: 1;
 }
+
+/* ===== TIÊU ĐỀ + NGÀY ===== */
 .title {
   text-align: center;
-  font-size: clamp(24px, 6vw, 42px);
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(32px, 8vw, 56px);
+  font-weight: 700;
   color: #6b5bd2;
   margin-bottom: 14px;
-  line-height: 1.3;
+  line-height: 1.25;
+  text-shadow:
+    0 2px 0 #fff,
+    0 4px 14px rgba(107, 91, 210, 0.25);
 }
+
 .date {
+  width: fit-content;
+  margin: 0 auto 28px;
+  padding: 6px 24px;
   text-align: center;
-  font-size: clamp(18px, 4vw, 24px);
-  color: #8f7fe8;
-  margin-bottom: 26px;
+  font-size: clamp(16px, 4vw, 22px);
+  color: #6b5bd2;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px dashed #a496f0;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(107, 91, 210, 0.15);
 }
+
+/* ===== THẺ LỜI CHÚC ===== */
+/* .wish-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #d4cbf7;
+  border-top: 8px solid #8f7fe8;
+  border-radius: 24px;
+  padding: 30px 26px 26px;
+  margin-bottom: 36px;
+  box-shadow: 0 14px 40px rgba(107, 91, 210, 0.18);
+} */
+
 .wish-card {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  padding: 28px;
-  margin-bottom: 34px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  border-radius: 24px;
+  padding: 30px 26px 26px;
+  margin-bottom: 36px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0);
 }
+
 .wish-text {
   font-size: clamp(16px, 3.5vw, 19px);
-  line-height: 1.8;
-  color: #555;
+  line-height: 1.85;
+  color: #4b4b5c;
   text-align: justify;
 }
+
 .signature {
   text-align: right;
-  font-style: italic;
-  font-weight: 600;
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(22px, 5vw, 28px);
+  font-weight: 700;
+  line-height: 1.4;
   margin-top: 22px;
-  color: #444;
+  color: #6b5bd2;
 }
+
+/* ===== OVERLAY QUIZ CÂU HỎI ===== */
+.quiz-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #c5d7ff 0%, #e0c8ff 100%);
+  transition:
+    opacity 0.6s ease,
+    visibility 0.6s ease;
+}
+
+.quiz-overlay.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.quiz-q {
+  font-family: "Dancing Script", cursive;
+  font-size: clamp(26px, 6vw, 36px);
+  font-weight: 700;
+  color: #4b3f9e;
+  line-height: 1.3;
+}
+
+.quiz-btns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.quiz-btn {
+  --s: 1;
+  font-size: calc(16px * var(--s));
+  padding: 0.7em 1.5em;
+  border: 0;
+  border-radius: 50px;
+  font-family: inherit;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+  transition:
+    transform 0.2s ease,
+    font-size 0.2s ease;
+}
+
+.quiz-btn.yes {
+  background: linear-gradient(135deg, #8f7fe8, #6b5bd2);
+}
+
+.quiz-btn.no {
+  background: #8d96ad;
+}
+
+/* ===== ẢNH KỶ NIỆM (POLAROID) ===== */
 .images-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-bottom: 34px;
+  gap: 22px;
+  margin-bottom: 38px;
+  padding: 6px;
 }
+
 .image-card {
-  border-radius: 15px;
-  overflow: hidden;
-  background: #e9e4fb;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  padding: 10px 10px 30px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(107, 91, 210, 0.2);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
+
+.image-card:nth-child(odd) {
+  transform: rotate(-2.5deg);
+}
+
+.image-card:nth-child(even) {
+  transform: rotate(2.5deg);
+}
+
+.image-card:hover {
+  transform: rotate(0deg) scale(1.04);
+  box-shadow: 0 14px 32px rgba(107, 91, 210, 0.3);
+}
+
 .image-card img {
   width: 100%;
   height: 230px;
   object-fit: cover;
   display: block;
+  border-radius: 4px;
 }
+
+/* ===== NÚT ĐIỀU KHIỂN ===== */
 .controls {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
   justify-content: center;
 }
+
 .control-btn {
-  padding: 14px 28px;
-  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 30px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
   border-radius: 50px;
+  font-family: inherit;
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
   cursor: pointer;
   background: linear-gradient(135deg, #8f7fe8, #6b5bd2);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(107, 91, 210, 0.3);
+  transition: transform 0.15s ease;
 }
+
+.control-btn:hover {
+  transform: translateY(-3px);
+}
+
+.control-btn:active {
+  transform: translateY(1px);
+}
+
 #confettiBtn {
   background: linear-gradient(135deg, #f093fb, #f5576c);
+  box-shadow: 0 8px 20px rgba(245, 87, 108, 0.3);
 }
+
+/* ===== MOBILE ===== */
 @media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+  .wish-card {
+    padding: 24px 16px 20px;
+    border-radius: 20px;
+  }
   .image-card img {
     height: 150px;
   }

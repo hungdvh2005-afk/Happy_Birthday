@@ -3,22 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy Birthday 🎉</title>
+    <title>Happy Birthday Duc Manh 🎉</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="dd_mm_yyyy_28072005.css" />
   </head>
   <body>
+    <!-- Canvas Pháo giấy -->
     <canvas id="confetti"></canvas>
 
+    <!-- Dải Icon Nghệ thuật & Game bay lơ lửng -->
+    <div class="float-layer" id="floatLayer" aria-hidden="true"></div>
+
     <div class="container">
-      <!-- ⚠️ SỬA: đổi TÊN BẠN cho đúng -->
       <h1 class="title">🎉 Happy birthday, DUC MANH 🎉</h1>
       <p class="date">
         <b><u>28/07/2005</u></b>
       </p>
 
       <div class="wish-card">
+        <!-- Overlay Bụp Biến Hình -->
         <div class="wish-overlay" id="wishOverlay">
-          <!-- ⚠️ SỬA: đổi ảnh cover -->
           <img
             src="https://res.cloudinary.com/qpuqus9n/image/upload/v1791447321/anhbup.jpg"
             alt="Cover"
@@ -29,7 +38,7 @@
           </div>
         </div>
 
-        <!-- ⚠️ SỬA: đổi lời chúc cho hợp với thằng bạn m -->
+        <!-- Lời chúc giữ chuẩn 100% -->
         <p class="wish-text">
           Y như cái tên! Mạnh thíiiiiii... Không biết nói gì hơn, thôi thì Chúc
           mừng sinh nhật bạn tôi, tối nay (hôm nao thì không biết :>>) chức m
@@ -50,7 +59,7 @@
         </p>
       </div>
 
-      <!-- ẢNH KỶ NIỆM: thay src bên dưới bằng ảnh thật -->
+      <!-- Ảnh kỷ niệm khung Polaroid -->
       <div class="images-grid">
         <div class="image-card">
           <img
@@ -78,7 +87,7 @@
         </div>
       </div>
 
-      <!-- VIDEO KỶ NIỆM: thay src bằng video thật, poster là ảnh chờ -->
+      <!-- Video Kỷ Niệm -->
       <div class="video-section">
         <video
           id="memoryVideo"
@@ -106,8 +115,8 @@
       </div>
     </div>
 
+    <!-- Nhạc nền -->
     <audio id="bgMusic" loop>
-      <!-- ⚠️ SỬA: đổi nhạc nền -->
       <source
         src="https://res.cloudinary.com/qpuqus9n/video/upload/v1791449162/Happy.mp3"
         type="audio/mpeg"

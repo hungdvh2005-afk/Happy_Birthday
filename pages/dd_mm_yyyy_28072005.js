@@ -1,9 +1,32 @@
-// ===== NHẠC NỀN - TỰ ĐỘNG PHÁT =====
+// ===== KHỞI TẠO ICON GAME, NGHỆ THUẬT, CỌ VẼ BAY MỜ DẦN =====
+function initFloatingIcons() {
+  const floatLayer = document.getElementById("floatLayer");
+  // Các icon chuyên biệt: Máy chơi game, bảng màu, cọ vẽ, khung tranh, dải sáng, tranh vẽ
+  const icons = ["🎮", "🎨", "🖌️", "🖼️", "✨", "🕹️", "🎨", "🖌️", "✨"];
+  const count = 20;
+
+  for (let i = 0; i < count; i++) {
+    const item = document.createElement("span");
+    item.className = "float-item";
+    item.textContent = icons[i % icons.length];
+
+    item.style.left = Math.random() * 100 + "%";
+    item.style.fontSize = 20 + Math.random() * 22 + "px";
+    item.style.animationDuration = 8 + Math.random() * 10 + "s";
+    item.style.animationDelay = -Math.random() * 12 + "s";
+
+    floatLayer.appendChild(item);
+  }
+}
+initFloatingIcons();
+
+// ===== ĐIỀU KHIỂN NHẠC NỀN & PHÁO GIẤY =====
 const bgMusic = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 let isPlaying = false;
 
 window.addEventListener("load", () => {
+  // Tự động phát nhạc sau khi vào trang
   setTimeout(() => {
     bgMusic
       .play()
@@ -12,13 +35,14 @@ window.addEventListener("load", () => {
         musicBtn.innerHTML =
           '<span class="icon">⏸️</span><span class="text">Tạm nínnn</span>';
       })
-      .catch((err) => {
-        console.log("Auto-play failed, user interaction required:", err);
-      });
+      .catch((err) =>
+        console.log("Cần tương tác người dùng để phát nhạc:", err),
+      );
   }, 800);
 
+  // Pháo giấy tự bung ban đầu
   setTimeout(() => {
-    startConfetti(8000, 500);
+    startConfetti(8000, 300);
   }, 300);
 });
 
@@ -35,10 +59,14 @@ musicBtn.addEventListener("click", () => {
   isPlaying = !isPlaying;
 });
 
-const overlay = document.getElementById("wishOverlay");
-overlay.addEventListener("click", () => {
-  overlay.classList.add("hidden");
-});
+// Touch / Bấm Bụp Cover để mở thư
+const wishOverlay = document.getElementById("wishOverlay");
+if (wishOverlay) {
+  wishOverlay.addEventListener("click", () => {
+    wishOverlay.classList.add("hidden");
+    startConfetti(6000, 0);
+  });
+}
 
 // ===== ÂM THANH PHÁO GIẤY =====
 const phaoSound = new Audio(
@@ -50,15 +78,15 @@ const loiChucSound = new Audio(
 
 function playPhaoSound() {
   phaoSound.currentTime = 0;
-  phaoSound.play().catch((err) => console.log("Audio play failed:", err));
+  phaoSound.play().catch(() => {});
 }
 
 function playLoiChucSound() {
   loiChucSound.currentTime = 0;
-  loiChucSound.play().catch((err) => console.log("Audio play failed:", err));
+  loiChucSound.play().catch(() => {});
 }
 
-// ===== CONFETTI EFFECT =====
+// ===== CANVAS CONFETTI EFFECT =====
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
 
@@ -84,17 +112,16 @@ class Confetti {
   }
 
   randomColor() {
+    // Các dải màu tươi sáng nghệ thuật
     const colors = [
-      "#4facfe",
-      "#00f2fe",
-      "#667eea",
-      "#764ba2",
-      "#43e97b",
-      "#38f9d7",
-      "#f6d365",
-      "#fda085",
-      "#a1c4fd",
-      "#c2e9fb",
+      "#ff6b6b",
+      "#ff8e53",
+      "#f8b500",
+      "#4a90e2",
+      "#ffbe76",
+      "#ff7979",
+      "#badc58",
+      "#e056fd",
     ];
     return colors[Math.floor(Math.random() * colors.length)];
   }
@@ -125,7 +152,7 @@ let confettiArray = [];
 let isConfettiActive = false;
 let confettiFadeTimeout = null;
 
-function initConfetti(count = 150) {
+function initConfetti(count = 160) {
   confettiArray = [];
   for (let i = 0; i < count; i++) {
     confettiArray.push(new Confetti());
@@ -139,10 +166,9 @@ function animateConfetti() {
   }
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  confettiArray.forEach((confetti) => {
-    confetti.update();
-    confetti.draw();
+  confettiArray.forEach((c) => {
+    c.update();
+    c.draw();
   });
 
   requestAnimationFrame(animateConfetti);
@@ -156,9 +182,7 @@ function fadeOutConfetti(duration = 2000) {
     const progress = Math.min(elapsed / duration, 1);
     const opacity = 1 - progress;
 
-    confettiArray.forEach((confetti) => {
-      confetti.opacity = opacity;
-    });
+    confettiArray.forEach((c) => (c.opacity = opacity));
 
     if (progress < 1) {
       requestAnimationFrame(fade);
@@ -167,19 +191,15 @@ function fadeOutConfetti(duration = 2000) {
       confettiArray = [];
     }
   }
-
   fade();
 }
 
-function startConfetti(duration = 10000, delay = 0) {
-  if (confettiFadeTimeout) {
-    clearTimeout(confettiFadeTimeout);
-  }
+function startConfetti(duration = 8000, delay = 0) {
+  if (confettiFadeTimeout) clearTimeout(confettiFadeTimeout);
 
   setTimeout(() => {
-    initConfetti(200);
+    initConfetti(180);
     isConfettiActive = true;
-    confettiArray.forEach((c) => (c.opacity = 1));
     animateConfetti();
 
     confettiFadeTimeout = setTimeout(() => {
@@ -189,10 +209,12 @@ function startConfetti(duration = 10000, delay = 0) {
 }
 
 document.getElementById("confettiBtn").addEventListener("click", () => {
-  startConfetti(8000, 0);
+  playPhaoSound();
+  setTimeout(playLoiChucSound, 3000);
+  startConfetti(8000, 2000);
 });
 
-// Tạm dừng nhạc nền khi bấm play video, để khỏi chồng tiếng
+// Tạm dừng nhạc nền khi bật xem Video kỷ niệm
 const memoryVideo = document.getElementById("memoryVideo");
 if (memoryVideo) {
   memoryVideo.addEventListener("play", () => {
